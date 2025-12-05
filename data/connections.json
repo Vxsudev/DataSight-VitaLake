@@ -1,0 +1,27 @@
+[
+  {
+    "id": "a541a62e-e3ad-4cb3-8f89-1acfec8450d3",
+    "name": "VitaLake-ETL",
+    "type": "postgresql",
+    "host": "localhost",
+    "port": 5432,
+    "database": "healthkit",
+    "username": "postgres",
+    "password": "postgres",
+    "ssl": false,
+    "createdAt": "2025-12-03T19:23:59.504Z",
+    "updatedAt": "2025-12-03T19:40:39.021Z"
+  },
+  {
+    "id": "e8e4e691-61a1-43f4-86f2-06fc1197505d",
+    "name": "vitalake-hk-consent",
+    "type": "postgresql",
+    "host": "localhost",
+    "port": 5440,
+    "database": "healthkit_consent",
+    "username": "postgres",
+    "password": "postgres",
+    "ssl": false,
+    "createdAt": "2025-12-03T20:13:54.414Z"
+  }
+]

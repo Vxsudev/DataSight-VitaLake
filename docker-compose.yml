@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  # DataSight-VitaLake Application
+  datasight:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_TELEMETRY_DISABLED=1
+    volumes:
+      # Mount data directory for database connections
+      - ./data:/app/data:ro
+      # Optional: Mount for persistent logs
+      - ./logs:/app/logs
+    depends_on:
+      - postgres
+    networks:
+      - datasight-network
+
+  # PostgreSQL Database (for demo/development)
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: datasight
+      POSTGRES_USER: datasight
+      POSTGRES_PASSWORD: datasight_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      # Optional: Mount init scripts
+      - ./database/init:/docker-entrypoint-initdb.d
+    networks:
+      - datasight-network
+
+  # Optional: pgAdmin for database management
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@datasight.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+    networks:
+      - datasight-network
+
+volumes:
+  postgres_data:
+
+networks:
+  datasight-network:
+    driver: bridge

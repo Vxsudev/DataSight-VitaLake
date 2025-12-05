@@ -1,0 +1,28 @@
+# Development override for Docker Compose
+version: '3.8'
+
+services:
+  datasight:
+    build:
+      context: .
+      target: deps  # Stop at deps stage for development
+    command: npm run dev
+    volumes:
+      # Mount source code for hot reload
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true  # For file watching in Docker
+    ports:
+      - "9002:3000"  # Use development port
+
+  # Development database with exposed port
+  postgres:
+    ports:
+      - "5433:5432"  # Different port to avoid conflicts
+    environment:
+      POSTGRES_DB: datasight_dev
+      POSTGRES_USER: dev_user
+      POSTGRES_PASSWORD: dev_password

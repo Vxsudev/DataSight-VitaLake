@@ -1,0 +1,26 @@
+[
+  {
+    "id": "docker-postgres",
+    "name": "Docker PostgreSQL",
+    "type": "postgresql",
+    "host": "postgres",
+    "port": 5432,
+    "database": "datasight",
+    "username": "datasight",
+    "password": "datasight_password",
+    "ssl": false,
+    "description": "PostgreSQL database running in Docker container"
+  },
+  {
+    "id": "docker-sample",
+    "name": "Sample Analytics DB",
+    "type": "postgresql", 
+    "host": "postgres",
+    "port": 5432,
+    "database": "sample_analytics",
+    "username": "datasight",
+    "password": "datasight_password",
+    "ssl": false,
+    "description": "Sample database with test data"
+  }
+]
